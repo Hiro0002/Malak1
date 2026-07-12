@@ -5,46 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>I love you Malokti thank you for being in my life </title>
     <style>
-    .audio-controls { 
-    position: fixed; 
-    bottom: 20px; 
-    right: 20px; 
-    /* This line stops the stretching */
-    width: fit-content; 
-    background: rgba(255, 255, 255, 0.6); 
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    padding: 6px 12px; 
-    border-radius: 50px; 
-    display: flex; 
-    align-items: center; 
-    gap: 8px;
-    z-index: 10000; 
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-}
-
-.audio-controls button { 
-    background: #6a4c93; /* Solid purple or gradient */
-    border: none; 
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    color: white;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 0.8rem;
-    padding: 0;
-    flex-shrink: 0; /* Prevents button from squishing */
-}
-
-.audio-controls input[type="range"] { 
-    width: 50px; /* This makes the slider very short */
-    cursor: pointer;
-    accent-color: #6a4c93;
-}
+    
 
         
         /* Base Styles */
@@ -336,32 +297,7 @@
             animation-direction: alternate;
         }
 
-        /* Music Controls */
-        .music-controls {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 100;
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 10px rgba(106, 76, 147, 0.3);
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .music-controls:hover {
-            transform: scale(1.1);
-        }
-
-        .music-controls i {
-            color: #6a4c93;
-            font-size: 24px;
-        }
+        
 
         /* Animations */
         @keyframes fadeIn {
@@ -452,6 +388,7 @@
         }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<base target="_blank">
 </head>
 <body>
     <div class="container">
@@ -540,53 +477,7 @@
     </div>
 
     <!-- Music Controls -->
-    <div class="music-controls" id="music-toggle">
-        <i class="fas fa-volume-mute" id="music-icon"></i>
-    </div>
-
     <!-- Audio Elements -->
-    <audio id="birthday-song" loop autoplay>
-    <source src="song.mp3.mp3" type="audio/mp3">
-</audio>
-
-<script>
-const audio = document.getElementById('birthday-song');
-const playPauseBtn = document.getElementById('play-pause');
-const volumeControl = document.getElementById('volume');
-
-// Restore audio state
-audio.currentTime = localStorage.getItem('audioTime') || 0;
-audio.volume = localStorage.getItem('audioVolume') || 0.5;
-if (localStorage.getItem('audioPaused') === 'true') {
-    audio.pause();
-    playPauseBtn.innerHTML = '<i>▶️</i>';
-} else {
-    audio.play();
-    playPauseBtn.innerHTML = '<i>⏸️</i>';
-}
-
-// Controls
-playPauseBtn.addEventListener('click', () => {
-    if (audio.paused) {
-        audio.play();
-        playPauseBtn.innerHTML = '<i>⏸️</i>';
-    } else {
-        audio.pause();
-        playPauseBtn.innerHTML = '<i>▶️</i>';
-        
-    }
-});
-volumeControl.addEventListener('input', () => { audio.volume = volumeControl.value; });
-
-// Save state again when leaving this page
-window.addEventListener('beforeunload', () => {
-    localStorage.setItem('audioTime', audio.currentTime);
-    localStorage.setItem('audioPaused', audio.paused);
-    localStorage.setItem('audioVolume', audio.volume);
-}); 
-</script>
-
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.5.1/confetti.browser.min.js"></script>
 
@@ -653,25 +544,6 @@ window.addEventListener('beforeunload', () => {
                 modalOverlay.classList.remove('active');
             });
 
-            // Music controls
-            const musicToggle = document.getElementById('music-toggle');
-            const musicIcon = document.getElementById('music-icon');
-            const backgroundMusic = document.getElementById('background-music');
-            let isMusicPlaying = false;
-
-            musicToggle.addEventListener('click', function() {
-                if (isMusicPlaying) {
-                    backgroundMusic.pause();
-                    musicIcon.classList.remove('fa-volume-up');
-                    musicIcon.classList.add('fa-volume-mute');
-                } else {
-                    backgroundMusic.play().catch(e => console.log('Audio play error:', e));
-                    musicIcon.classList.remove('fa-volume-mute');
-                    musicIcon.classList.add('fa-volume-up');
-                }
-                isMusicPlaying = !isMusicPlaying;
-            });
-
             // Helper Functions
             function createFloatingElement(element, index) {
                 const floatingElement = document.createElement('div');
@@ -727,118 +599,5 @@ window.addEventListener('beforeunload', () => {
         });
     </script>
     <script src="script.js"></script>
-    <script>
-        // PASTE YOUR NEW JS CODE HERE
-        const audio = document.getElementById('birthday-song');
-        
-        // Example: The code I gave you to resume the song
-        document.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-            }
-        }, { once: true });
-    </script>
-    <audio id="birthday-song" loop>
-    <source src="song.mp3.mp3" type="audio/mp3">
-</audio>
-<script>
-    <div class="audio-controls">
-        <button id="play-pause"><i>▶️</i></button>
-        <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5">
-    </div>
-    window.addEventListener('load', () => {
-        const audio = document.getElementById('birthday-song');
-        
-        // 1. Get the saved time and volume from the previous page
-        const savedTime = localStorage.getItem('audioTime');
-        const savedVolume = localStorage.getItem('audioVolume');
-        const wasPlaying = localStorage.getItem('audioWasPlaying');
-
-        // 2. Set the song to that exact spot
-        if (savedTime) {
-            audio.currentTime = parseFloat(savedTime);
-        }
-        if (savedVolume) {
-            audio.volume = parseFloat(savedVolume);
-        }
-
-        // 3. RESUME playing as soon as she clicks anything on this new page
-        document.addEventListener('click', () => {
-            if (wasPlaying === 'true') {
-                audio.play();
-            }
-        }, { once: true });
-    });
-    volumeControl.addEventListener('input', () => {
-    audio.volume = volumeControl.value;
-    localStorage.setItem('audioVolume', audio.volume);
-});
-</script>
-</body>
-<audio id="birthday-song" loop>
-        <source src="song.mp3.mp3" type="audio/mp3">
-    </audio>
-
-    <div class="audio-controls">
-    <button id="pill-play-pause">▶️</button> 
-    <input type="range" id="pill-volume" min="0" max="1" step="0.1" value="0.5">
-</div>
-
-    <script>
-    
-document.addEventListener('DOMContentLoaded', function() {
-    const audio = document.getElementById('birthday-song');
-    const playPauseBtn = document.getElementById('pill-play-pause');
-    const volumeSlider = document.getElementById('pill-volume');
-
-    // 1. Sync Volume and Time from previous page
-    const savedTime = localStorage.getItem('audioTime');
-    const savedVol = localStorage.getItem('audioVolume');
-    
-    if (savedTime) audio.currentTime = parseFloat(savedTime);
-    if (savedVol) {
-        audio.volume = parseFloat(savedVol);
-        volumeSlider.value = savedVol;
-    }
-
-    // 2. Fix Browser Auto-play (Play on first click)
-    const initAudio = () => {
-        audio.play().then(() => {
-            playPauseBtn.innerHTML = "⏸️";
-        }).catch(err => console.log("Playback waiting for interaction"));
-        document.removeEventListener('click', initAudio);
-    };
-    document.addEventListener('click', initAudio);
-
-    // 3. Play/Pause Button Toggle
-    playPauseBtn.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevents double-triggering
-        if (audio.paused) {
-            audio.play();
-            playPauseBtn.innerHTML = "⏸️";
-        } else {
-            audio.pause();
-            playPauseBtn.innerHTML = "▶️";
-        }
-    });
-
-    // 4. Make the Sound Bar Responsive
-    volumeSlider.addEventListener('input', () => {
-        audio.volume = volumeSlider.value;
-        localStorage.setItem('audioVolume', audio.volume);
-    });
-
-    // 5. Continuously save time so Page 3 knows where to start
-    setInterval(() => {
-        if (!audio.paused) {
-            localStorage.setItem('audioTime', audio.currentTime);
-        }
-    }, 1000);
-});
-</script>
-    
-</body>
-</html>
- </html>
 </body>
 </html>
