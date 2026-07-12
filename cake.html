@@ -990,6 +990,72 @@
 
     </body>
 </html>
+<audio id="birthday-song" loop>
+  <source src="song.mp3.mp3" type="audio/mp3">
+</audio>
+
+<div class="audio-controls" style="position: fixed; bottom: 85px; left: 50%; transform: translateX(-50%); background: rgba(255,255,255,0.7); padding: 8px 16px; border-radius: 50px; display: flex; align-items: center; z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.2);">
+  <button id="play-pause" style="background:none; border:none; font-size:1.5rem; cursor:pointer; color:#FF1493; margin-right:10px;"><i>⏸️</i></button>
+  <input type="range" id="volume" min="0" max="1" step="0.1" value="0.5" style="width: 80px;">
+</div>
+
+<script>
+  const audio = document.getElementById('birthday-song');
+  const playPauseBtn = document.getElementById('play-pause');
+  const volumeControl = document.getElementById('volume');
+
+  // Load music from previous page
+  window.addEventListener('DOMContentLoaded', () => {
+      const savedTime = localStorage.getItem('audioTime');
+      const isPaused = localStorage.getItem('audioPaused');
+      const savedVol = localStorage.getItem('audioVolume');
+
+      if (savedTime) audio.currentTime = parseFloat(savedTime);
+      if (savedVol) {
+          audio.volume = parseFloat(savedVol);
+          volumeControl.value = savedVol;
+      }
+
+      // Auto-resume if it was playing
+      if (isPaused === 'false') {
+          audio.play().catch(() => {
+              playPauseBtn.innerHTML = '<i>▶️</i>';
+          });
+      } else {
+          playPauseBtn.innerHTML = '<i>▶️</i>';
+      }
+  });
+
+  // Button controls
+  playPauseBtn.addEventListener('click', () => {
+      if (audio.paused) {
+          audio.play();
+          playPauseBtn.innerHTML = '<i>⏸️</i>';
+      } else {
+          audio.pause();
+          playPauseBtn.innerHTML = '<i>▶️</i>';
+      }
+  });
+
+  volumeControl.addEventListener('input', () => {
+      audio.volume = volumeControl.value;
+  });
+
+  // Update global variables when moving away from Page 3
+  function goBack() {
+      localStorage.setItem('audioTime', audio.currentTime);
+      localStorage.setItem('audioPaused', audio.paused);
+      window.location.href = "memorylane.html";
+  }
+
+  function goNext() {
+      localStorage.setItem('audioTime', audio.currentTime);
+      localStorage.setItem('audioPaused', audio.paused);
+      window.location.href = "letter.html";
+      audio.volume = parseFloat(localStorage.getItem('audioVolume')) || 0.5;
+
+  }
+</script>
 <img src="flutty.webp" class="stylish-pic pos-left">
 
 <img src="flut.webp" class="stylish-pic pos-right">
